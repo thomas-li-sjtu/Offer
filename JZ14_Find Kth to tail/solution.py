@@ -1,26 +1,31 @@
-# -*- coding:utf-8 -*-
 class ListNode:
     def __init__(self, x):
         self.val = x
         self.next = None
 
 
+#
+#
+#
+# @param pHead ListNode类
+# @param k int整型
+# @return ListNode类
+#
 class Solution:
-    def FindKthToTail(self, head: ListNode, k: int):
-        # write code here
-        pointer1 = head
-        pointer2 = head
-        counter = 1
-        if k <= 0:  # special case
-            return None
-        if not head:  # special case
-            return head
-        while pointer1.next:
-            counter += 1
-            if counter >= k:
-                pointer2 = pointer2.next
-            pointer1 = pointer1.next
-        if counter < k:  # special case
-            return None
-
-        return pointer2
+    def FindKthToTail(self, pHead, k):
+        # write code herep
+        if not pHead:
+            return pHead
+        if k <= 0:
+            node = ListNode(0)
+            return node.next
+        last_node = pHead
+        for i in range(k - 1):
+            if last_node.next is not None:
+                last_node = last_node.next
+            else:
+                return last_node.next
+        while last_node.next is not None:
+            last_node = last_node.next
+            pHead = pHead.next
+        return pHead
